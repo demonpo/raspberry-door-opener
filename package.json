@@ -38,6 +38,7 @@
     "faker": "^6.6.6",
     "glob": "^8.0.3",
     "node-emoji": "^1.11.0",
+    "onoff": "^6.0.3",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
