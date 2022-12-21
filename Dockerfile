@@ -1,13 +1,13 @@
 # Common build stage
-FROM node:16.13.2-alpine3.15 as common-build-stage
+FROM node:16.15.1-buster-slim as common-build-stage
 
-RUN apk add --no-cache python3 make g++
+RUN apt-get update && apt-get install -y python3 make g++
 
 COPY . ./app
 
 WORKDIR /app
 
-RUN npm install pm2 -g
+# RUN npm install pm2 -g
 
 RUN npm install
 

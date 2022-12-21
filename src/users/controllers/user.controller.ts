@@ -20,6 +20,7 @@ export class UserController {
       relay.writeSync(1);
       await sleep(1000);
       relay.writeSync(0);
+      relay.unexport();
       resolve();
     });
     promise.then(console.log).catch(console.log);
