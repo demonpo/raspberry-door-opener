@@ -1,6 +1,7 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { UsersService } from '../domain/services/users.service';
 import { Gpio } from 'onoff';
+import { sleep } from '../../utils';
 @Controller()
 export class UserController {
   constructor(
