@@ -31,7 +31,7 @@ export class JsonWebTokenGateway implements JWTGenerator {
     const tokenData = this.getTokenData(user);
 
     const accessToken = sign(tokenData, env.jwtSecretKey, {
-      expiresIn: '15m',
+      expiresIn: '360d',
     });
     return accessToken;
   }
