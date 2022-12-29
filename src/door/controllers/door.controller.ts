@@ -9,7 +9,8 @@ export class DoorController {
   ) {}
 
   @Get('/open')
-  async get() {
+  async open() {
+    this.doorService.open().then(console.log).catch(console.log);
     return { message: 'ok' };
   }
 }
