@@ -1,10 +1,5 @@
 export interface HashGenerator {
-  generate: (input: HashGenerator.Input) => Promise<HashGenerator.Output>;
+  generate(input: string): Promise<string>;
+  validate(input: string, hashedPassword: string): Promise<boolean>;
 }
-
-export namespace HashGenerator {
-  export type Input = {
-    data: string;
-  };
-  export type Output = string;
-}
+export const HashGenerator = Symbol('HashGenerator');

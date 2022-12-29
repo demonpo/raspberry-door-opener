@@ -14,4 +14,14 @@ export class UserMapper {
     });
     return products;
   }
+
+  public static toEntity(user: User): UserEntity {
+    const userEntity = new UserEntity();
+    userEntity.id = user.id;
+    userEntity.firstName = user.firstName;
+    userEntity.lastName = user.lastName;
+    userEntity.email = user.email;
+    userEntity.password = user.password;
+    return userEntity;
+  }
 }

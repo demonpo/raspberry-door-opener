@@ -34,6 +34,8 @@
     "@prometeo-dev/error-handler-library": "^1.1.0",
     "@prometeo-dev/jwt-handler-library": "^1.1.0",
     "@prometeo-dev/rabbit-consumer-producer-library": "^1.0.3",
+    "bcrypt": "^5.1.0",
+    "class-validator": "^0.14.0",
     "commander": "^9.4.0",
     "faker": "^6.6.6",
     "glob": "^8.0.3",

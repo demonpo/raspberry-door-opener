@@ -1,37 +1,22 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Controller, Get, Inject, Headers } from '@nestjs/common';
+import { JWTGenerator } from '../domain/contracts/gateways/jwt';
 import { UsersService } from '../domain/services/users.service';
-import { Gpio } from 'onoff';
-import { sleep } from '../../utils';
+import { UserDtoMapper } from './mappers';
 
-@Controller()
+@Controller('user')
 export class UserController {
   constructor(
     @Inject(UsersService)
     private readonly usersService: UsersService,
+    @Inject(JWTGenerator)
+    private readonly jwtGenerator: JWTGenerator,
   ) {}
 
-  @Get('/test')
-  async test() {
-    return { message: 'test2' };
-  }
-
-  @Get('/test-gpio')
-  async testGpio() {
-    const promise = new Promise<void>(async (resolve, reject) => {
-      const relay = new Gpio(17, 'out');
-      relay.writeSync(1);
-      await sleep(1000);
-      relay.writeSync(0);
-      resolve();
-    });
-    promise.then(console.log).catch(console.log);
-    return { message: 'ok' };
-  }
-
-  @Get('/users')
-  async findAll() {
-    return {
-      data: await this.usersService.find(),
-    };
+  @Get('/')
+  async get(@Headers('Authorization') authorization: string) {
+    const accessToken = authorization.split(' ')[1];
+    const jwtData = this.jwtGenerator.decode(accessToken);
+    const user = await this.usersService.findOneById(jwtData.sub);
+    return { data: UserDtoMapper.toResponse(user) };
   }
 }
